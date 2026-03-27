@@ -64,131 +64,37 @@
 
     /* HERO */
     .hero {
-      min-height: 82vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 96px 5% 56px;
-      background:
-        radial-gradient(circle at 18% 8%, rgba(201,151,0,0.09), transparent 30%),
-        radial-gradient(circle at 82% 22%, rgba(0,32,91,0.05), transparent 35%),
-        repeating-linear-gradient(135deg, rgba(0,0,0,0.012) 0, rgba(0,0,0,0.012) 2px, transparent 2px, transparent 6px),
-        #f8f7f2;
-      position: relative;
-      overflow: hidden;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 100px 7% 80px;
+      background: var(--soft);
+      position: relative; overflow: hidden;
     }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+    .hero::after {
+      content: '✝';
+      position: absolute; right: 7%; bottom: 40px;
+      font-size: 220px; color: rgba(0,32,91,0.04);
+      font-family: serif; line-height: 1; pointer-events: none;
     }
-    .hero-badge::before,
-    .hero-badge::after {
-      content: '';
-      width: 60px;
-      height: 2px;
-      background: rgba(201,151,0,0.7);
-      border-radius: 2px;
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
     }
-    .hero-kicker {
-      color: var(--mid);
-      font-size: clamp(13px, 1.8vw, 17px);
-      letter-spacing: 3px;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
+    .hero-eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--gold); border-radius: 2px; }
     .hero h1 {
       font-family: 'Lora', serif;
-      font-size: clamp(26px, 4.5vw, 36px);
+      font-size: clamp(36px, 5vw, 62px);
       font-weight: 600; line-height: 1.15;
-      color: var(--blue);
-      max-width: 920px;
-      margin: 0 auto 16px;
-      letter-spacing: 1px;
-      text-shadow: 3px 3px 0 rgba(0,32,91,0.08);
+      color: var(--blue); max-width: 700px; margin-bottom: 12px;
     }
     .hero h1 em { font-style: italic; color: var(--red); }
-    .hero-values {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      color: var(--blue);
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .hero-values .dot {
-      color: #e4b628;
-      font-size: 17px;
-      line-height: 1;
-    }
-    .hero-focus-wrap {
-      width: min(900px, 100%);
-      background: linear-gradient(120deg, rgba(201,151,0,0.22), rgba(0,32,91,0.16));
-      border-radius: 6px;
-      padding: 30px 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
-    }
-    .hero-focus {
-      background: rgba(255,255,255,0.82);
-      border: 3px solid #c1c7cf;
-      border-radius: 14px;
-      padding: 22px 20px 18px;
-    }
-    .focus-label {
-      font-size: 14px;
-      letter-spacing: 2px;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 7px;
-      text-transform: uppercase;
-    }
-    .focus-quote {
-      font-family: 'Lora', serif;
-      font-size: clamp(28px, 3.2vw, 42px);
-      font-style: italic;
-      color: #111;
-      margin-bottom: 2px;
-    }
-    .focus-ref {
-      font-size: 18px;
-      letter-spacing: 2px;
-      font-weight: 700;
-      color: var(--blue);
-      text-transform: uppercase;
-    }
     .hero-sub {
       font-family: 'Lora', serif; font-style: italic;
-      font-size: clamp(13px, 1.2vw, 16px);
-      color: var(--blue);
-      margin: 0 auto 24px;
-      max-width: 900px;
-      line-height: 1.62;
+      font-size: clamp(16px, 2vw, 20px); color: var(--mid);
+      margin-bottom: 36px; max-width: 560px; line-height: 1.6;
     }
-    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-    .hero-book {
-      position: absolute;
-      font-size: 42px;
-      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
-      opacity: 0.92;
-      user-select: none;
-      pointer-events: none;
-    }
-    .hero-book.left { left: 4%; top: 152px; transform: rotate(-13deg); }
-    .hero-book.right { right: 4%; top: 112px; transform: rotate(13deg); }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn {
       padding: 12px 26px; border-radius: 6px;
       font-size: 14px; font-weight: 600; text-decoration: none;
@@ -341,16 +247,6 @@
       .what-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       footer { flex-direction: column; align-items: flex-start; }
-      .hero { padding-top: 94px; }
-      .hero-badge { letter-spacing: 2px; gap: 10px; }
-      .hero-badge::before, .hero-badge::after { width: 28px; }
-      .hero-kicker { letter-spacing: 1.7px; }
-      .hero-values { gap: 10px; font-size: 13px; letter-spacing: 1.5px; }
-      .hero-focus-wrap { padding: 24px 12px; }
-      .focus-label { font-size: 15px; }
-      .focus-ref { font-size: 18px; }
-      .hero-sub { font-size: clamp(19px, 5.2vw, 26px); }
-      .hero-book { display: none; }
     }
   </style>
 </head>
@@ -375,26 +271,9 @@
 
 <!-- HERO -->
 <div class="hero">
-  <span class="hero-book left">📕</span>
-  <span class="hero-book right">📙</span>
-  <div class="hero-badge">CRU AT AUGUSTA UNIVERSITY</div>
-  <div class="hero-kicker">Looking for community on campus?</div>
-  <h1>Knowing God <em>Personally.</em></h1>
-  <div class="hero-values">
-    <span>Connect</span>
-    <span class="dot">◆</span>
-    <span>Explore Faith</span>
-    <span class="dot">◆</span>
-    <span>Build Community</span>
-  </div>
-  <div class="hero-focus-wrap">
-    <div class="hero-focus">
-      <p class="focus-label">This Week's Focus</p>
-      <p class="focus-quote">"Come as you are."</p>
-      <p class="focus-ref">John 6:37</p>
-    </div>
-  </div>
-  <p class="hero-sub">We’re a community of students at Augusta University helping people know Jesus, grow in their faith, and live with purpose.<br><br>Whether you’re exploring faith or have been following Christ for years, you’re welcome here.</p>
+  <div class="hero-eyebrow">Augusta University</div>
+  <h1>Calling Students to Follow Christ<br>& <em>Change the World.</em></h1>
+  <p class="hero-sub">We are about helping students know God, find community, and live a life that matters.</p>
   <div class="hero-btns">
     <a href="#connect" class="btn btn-solid">Introduce Yourself</a>
     <a href="#what" class="btn btn-line">What We Do</a>
@@ -408,45 +287,44 @@
     <cite>— Cru Mission</cite>
   </div>
   <div class="about-text fi">
-    <div class="sec-label">Who We Are</div>
+    <div class="sec-label">About Cru</div>
     <h2>Who We Are</h2>
-    <p>At CRU Augusta, we believe college is one of the most pivotal seasons of life. We exist to help students discover who they are, why they're here, and how they can change the world for Christ.</p>
-    <p>Our mission is simple: Win — Reach the Campus. Build — Grow in Faith. Send — Impact the World.</p>
-      <p><strong>Our goal is to help students not only grow in their relationship with God, but also learn how to share their faith and make an impact on campus.</strong></p>
-    <a href="https://www.cru.org/us/en/about/statement-of-faith.html" target="_blank">Full Statement of Faith →</a>
+    <p>Bill and Vonette Bright launched Campus Crusade for Christ as a campus ministry in 1951 to "win the campus today and change the world tomorrow." Today, Cru is a network of movements on more than 1,000 college campuses around the world.</p>
+    <p>At Augusta University, we exist to build a community where students can grow in faith, connect with others, and be sent out to make a difference.</p>
+    <a href="https://www.cru.org/us/en/about/statement-of-faith.html" target="_blank">Read our Statement of Faith →</a>
   </div>
 </section>
 
 <!-- WHAT WE DO -->
 <section class="what" id="what">
   <div class="what-header">
-    <div class="sec-label">What's Happening</div>
-    <h2>Upcoming Events</h2>
+    <div class="sec-label">What We Do</div>
+    <h2>Ways to Get Connected</h2>
   </div>
   <div class="what-grid">
     <div class="what-card fi">
       <span class="what-icon">🙏</span>
-      <h3>Large Group Meeting</h3>
-      <p>Our main weekly gathering featuring worship, a relevant message, and real community. Everyone welcome — bring a friend.</p>
-      <a href="#connect">Thursdays · 7:00 PM →</a>
+      <h3>Weekly Meeting</h3>
+      <p>Join us Thursdays at 7:00 PM for community and teaching from God's Word. Everyone is welcome — just show up.</p>
+      <a href="#connect">Find out more →</a>
     </div>
     <div class="what-card fi">
       <span class="what-icon">📖</span>
-      <h3>Book of Romans Deep Dive</h3>
-      <p>A 6-week journey through Romans exploring the foundations of Christian faith with open discussion and growing community.</p>
-      <a href="#connect">Bible Study Night →</a>
+      <h3>Small Group Bible Studies</h3>
+      <p>Experience real community through a Cru small group Bible study. Groups meet throughout the week across campus.</p>
+      <a href="#connect">Sign up today →</a>
     </div>
     <div class="what-card fi">
       <span class="what-icon">🌍</span>
-      <h3>Summer Missions Info Night</h3>
-      <p>Explore short-term mission opportunities across the U.S. and abroad. Come learn how you can go this summer.</p>
-      <a href="#connect">Learn More →</a>
+      <h3>Summer Missions</h3>
+      <p>Invest in God's call on your life through a Cru Summer Mission — opportunities across the U.S. and internationally.</p>
+      <a href="https://www.cru.org/us/en/opportunities/jobs-and-internships/summer.html" target="_blank">Learn more →</a>
     </div>
     <div class="what-card fi">
       <span class="what-icon">🎉</span>
-      <h3>Rooted in Historic Christian Faith</h3>
-      <p>We hold to the Scriptures as our authority, Jesus Christ as our center, and the Great Commission as our call.</p>
-      <a href="https://www.cru.org/us/en/about/statement-of-faith.html" target="_blank">Read Beliefs →</a>
+      <h3>Conferences & Events</h3>
+      <p>Grow in your faith and connect to the mission through Cru events and conferences throughout the year.</p>
+      <a href="#connect">Get details →</a>
     </div>
   </div>
 </section>
@@ -454,9 +332,9 @@
 <!-- CONNECT -->
 <section class="connect" id="connect">
   <div class="connect-left fi">
-    <div class="sec-label">Connect With Us</div>
-    <h2>Ready to take the first step?</h2>
-    <p>We'd love to connect with you personally. Fill out the form and someone will reach out — or just show up to our Thursday meeting. No pressure, always welcome.</p>
+    <div class="sec-label">Say Hello</div>
+    <h2>Introduce Yourself</h2>
+    <p>If you're new to Cru, want to get more involved, or just have questions — fill out our connection form and we'll personally reach out. No pressure, always welcome.</p>
     <div class="con-items">
       <div class="con-row">
         <span class="con-icon">📍</span>
@@ -474,7 +352,7 @@
   </div>
   <div class="form-wrap fi">
     <h3>Get Connected</h3>
-    <p>Let us know a bit about you and how we can best reach out.</p>
+    <p>We'll reach out personally — usually within a day.</p>
     <iframe
       src="https://docs.google.com/forms/d/e/1FAIpQLSdMqj4Xw4JkcGIj2utX44ipvFptdPRgDfZXkFdVb28SaJIszA/viewform?embedded=true"
       width="100%"
