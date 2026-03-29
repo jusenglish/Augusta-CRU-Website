@@ -318,29 +318,136 @@
     .campus-map-img {
       width: 100%; border-radius: 8px;
       border: 1px solid var(--stone);
-      display: block; cursor: pointer;
-      transition: box-shadow 0.2s;
+      display: block;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .campus-map-img:hover {
+    .campus-map-trigger {
+      display: block;
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 0;
+      border-radius: 8px;
+      cursor: zoom-in;
+      text-align: left;
+    }
+    .campus-map-trigger:hover .campus-map-img,
+    .campus-map-trigger:focus-visible .campus-map-img {
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+    }
+    .campus-map-trigger:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 3px;
     }
     .campus-map-caption {
       font-size: 11px; color: var(--slate);
       margin-top: 6px; line-height: 1.5;
     }
 
+    body.map-open {
+      overflow: hidden;
+    }
+
     .lightbox {
       display: none; position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 200; background: rgba(0,0,0,0.8);
+      z-index: 200; background: rgba(14,14,14,0.84);
       align-items: center; justify-content: center;
-      padding: 24px; cursor: zoom-out;
+      padding: 18px;
     }
     .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: 100%; max-height: 90vh;
+    .lightbox-panel {
+      width: min(980px, 100%);
+      max-height: min(94vh, 920px);
+      background: rgba(20,20,20,0.92);
+      border: 1px solid rgba(255,255,255,0.14);
       border-radius: 8px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 44px rgba(0,0,0,0.45);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox-close:hover,
+    .lightbox-close:focus-visible {
+      background: rgba(255,255,255,0.2);
+      outline: none;
+    }
+    .lightbox-toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding-top: 2px;
+    }
+    .lightbox-toolbar button {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .lightbox-toolbar button:hover,
+    .lightbox-toolbar button:focus-visible {
+      background: rgba(249,182,37,0.25);
+      border-color: rgba(249,182,37,0.6);
+      outline: none;
+    }
+    .lightbox-stage {
+      position: relative;
+      flex: 1;
+      min-height: 280px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.12);
+      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+    .lightbox-stage.can-pan {
+      cursor: grab;
+    }
+    .lightbox-stage.dragging {
+      cursor: grabbing;
+    }
+    .lightbox-stage img {
+      max-width: 100%;
+      max-height: 76vh;
+      width: auto;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 8px 34px rgba(0,0,0,0.45);
+      transform-origin: center center;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: transform 0.08s linear;
+    }
+    .lightbox-hint {
+      color: rgba(255,255,255,0.75);
+      font-size: 11px;
+      text-align: center;
+      letter-spacing: 0.2px;
     }
 
     .form-card {
@@ -456,6 +563,31 @@
 
       .form-card { padding: 20px 16px; }
       .form-card iframe { height: 520px; }
+
+      .lightbox {
+        padding: 10px;
+      }
+      .lightbox-panel {
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .lightbox-toolbar {
+        gap: 6px;
+      }
+      .lightbox-toolbar button {
+        flex: 1;
+        padding: 8px 8px;
+        font-size: 12px;
+      }
+      .lightbox-stage {
+        min-height: 220px;
+      }
+      .lightbox-stage img {
+        max-height: 68vh;
+      }
+      .lightbox-hint {
+        font-size: 10px;
+      }
 
       footer {
         flex-direction: column;
@@ -576,13 +708,14 @@
 
     <div class="campus-map">
       <p class="campus-map-label">Find Us on Campus</p>
-      <img
-        class="campus-map-img"
-        src="Health_Science_Campus_Map.jpg"
-        alt="Health Sciences Campus map showing Pavilion III location"
-        onclick="document.getElementById('mapLightbox').classList.add('open')"
-      />
-      <p class="campus-map-caption">Tap to enlarge — we meet in Pavilion III, Room 2340.</p>
+      <button class="campus-map-trigger" id="openMapLightbox" type="button" aria-label="Open full-screen campus map viewer">
+        <img
+          class="campus-map-img"
+          src="Health%20Science%20Campus%20Map.jpg"
+          alt="Health Sciences Campus map showing Pavilion III location"
+        />
+      </button>
+      <p class="campus-map-caption">Tap to open, then pinch or use +/- to zoom. We meet in Pavilion III, Room 2340.</p>
     </div>
   </div>
 
@@ -624,8 +757,19 @@
 </footer>
 
 <!-- MAP LIGHTBOX -->
-<div class="lightbox" id="mapLightbox" onclick="this.classList.remove('open')">
-  <img src="Health_Science_Campus_Map.jpg" alt="Health Sciences Campus map enlarged" />
+<div class="lightbox" id="mapLightbox" aria-hidden="true">
+  <div class="lightbox-panel" role="dialog" aria-modal="true" aria-label="Campus map zoom viewer">
+    <button class="lightbox-close" id="closeMapLightbox" type="button" aria-label="Close map viewer">&times;</button>
+    <div class="lightbox-toolbar">
+      <button type="button" id="zoomOutBtn" aria-label="Zoom out map">-</button>
+      <button type="button" id="resetZoomBtn" aria-label="Reset map zoom">Reset</button>
+      <button type="button" id="zoomInBtn" aria-label="Zoom in map">+</button>
+    </div>
+    <div class="lightbox-stage" id="mapStage">
+      <img id="mapZoomImage" src="Health%20Science%20Campus%20Map.jpg" alt="Health Sciences Campus map enlarged" draggable="false" />
+    </div>
+    <p class="lightbox-hint">Pinch, drag, or use your mouse wheel to zoom and move around the map.</p>
+  </div>
 </div>
 
 <script>
@@ -638,6 +782,175 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+  const mapTrigger = document.getElementById('openMapLightbox');
+  const mapLightbox = document.getElementById('mapLightbox');
+  const mapStage = document.getElementById('mapStage');
+  const mapZoomImage = document.getElementById('mapZoomImage');
+  const closeMapLightboxBtn = document.getElementById('closeMapLightbox');
+  const zoomInBtn = document.getElementById('zoomInBtn');
+  const zoomOutBtn = document.getElementById('zoomOutBtn');
+  const resetZoomBtn = document.getElementById('resetZoomBtn');
+
+  let scale = 1;
+  let offsetX = 0;
+  let offsetY = 0;
+  const minScale = 1;
+  const maxScale = 4;
+
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let pinchStartDistance = 0;
+  let pinchStartScale = 1;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+  const clampOffsets = () => {
+    const maxX = Math.max(0, ((mapZoomImage.clientWidth * scale) - mapStage.clientWidth) / 2);
+    const maxY = Math.max(0, ((mapZoomImage.clientHeight * scale) - mapStage.clientHeight) / 2);
+    offsetX = clamp(offsetX, -maxX, maxX);
+    offsetY = clamp(offsetY, -maxY, maxY);
+  };
+
+  const applyTransform = () => {
+    clampOffsets();
+    mapZoomImage.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    mapStage.classList.toggle('can-pan', scale > 1);
+  };
+
+  const setScale = (nextScale) => {
+    scale = clamp(nextScale, minScale, maxScale);
+    if (scale === 1) {
+      offsetX = 0;
+      offsetY = 0;
+    }
+    applyTransform();
+  };
+
+  const resetView = () => {
+    scale = 1;
+    offsetX = 0;
+    offsetY = 0;
+    applyTransform();
+  };
+
+  const openMapViewer = () => {
+    mapLightbox.classList.add('open');
+    mapLightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('map-open');
+    resetView();
+  };
+
+  const closeMapViewer = () => {
+    mapLightbox.classList.remove('open');
+    mapLightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('map-open');
+    isDragging = false;
+    mapStage.classList.remove('dragging');
+  };
+
+  const getTouchDistance = (touches) => {
+    if (touches.length < 2) return 0;
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.hypot(dx, dy);
+  };
+
+  mapTrigger.addEventListener('click', openMapViewer);
+  closeMapLightboxBtn.addEventListener('click', closeMapViewer);
+
+  mapLightbox.addEventListener('click', (event) => {
+    if (event.target === mapLightbox) closeMapViewer();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!mapLightbox.classList.contains('open')) return;
+    if (event.key === 'Escape') closeMapViewer();
+  });
+
+  zoomInBtn.addEventListener('click', () => setScale(scale + 0.25));
+  zoomOutBtn.addEventListener('click', () => setScale(scale - 0.25));
+  resetZoomBtn.addEventListener('click', resetView);
+
+  mapStage.addEventListener('wheel', (event) => {
+    if (!mapLightbox.classList.contains('open')) return;
+    event.preventDefault();
+    const direction = event.deltaY > 0 ? -1 : 1;
+    setScale(scale + direction * 0.2);
+  }, { passive: false });
+
+  mapStage.addEventListener('mousedown', (event) => {
+    if (scale <= 1) return;
+    event.preventDefault();
+    isDragging = true;
+    dragStartX = event.clientX - offsetX;
+    dragStartY = event.clientY - offsetY;
+    mapStage.classList.add('dragging');
+  });
+
+  window.addEventListener('mousemove', (event) => {
+    if (!isDragging) return;
+    offsetX = event.clientX - dragStartX;
+    offsetY = event.clientY - dragStartY;
+    applyTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    mapStage.classList.remove('dragging');
+  });
+
+  mapStage.addEventListener('touchstart', (event) => {
+    if (event.touches.length === 2) {
+      pinchStartDistance = getTouchDistance(event.touches);
+      pinchStartScale = scale;
+      isDragging = false;
+      return;
+    }
+    if (event.touches.length === 1 && scale > 1) {
+      dragStartX = event.touches[0].clientX - offsetX;
+      dragStartY = event.touches[0].clientY - offsetY;
+      isDragging = true;
+      mapStage.classList.add('dragging');
+    }
+  }, { passive: true });
+
+  mapStage.addEventListener('touchmove', (event) => {
+    if (!mapLightbox.classList.contains('open')) return;
+
+    if (event.touches.length === 2) {
+      event.preventDefault();
+      const distance = getTouchDistance(event.touches);
+      if (pinchStartDistance > 0) {
+        setScale(pinchStartScale * (distance / pinchStartDistance));
+      }
+      return;
+    }
+
+    if (event.touches.length === 1 && isDragging && scale > 1) {
+      event.preventDefault();
+      offsetX = event.touches[0].clientX - dragStartX;
+      offsetY = event.touches[0].clientY - dragStartY;
+      applyTransform();
+    }
+  }, { passive: false });
+
+  mapStage.addEventListener('touchend', (event) => {
+    if (event.touches.length < 2) {
+      pinchStartDistance = 0;
+    }
+    if (event.touches.length === 0) {
+      isDragging = false;
+      mapStage.classList.remove('dragging');
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (mapLightbox.classList.contains('open')) {
+      applyTransform();
+    }
+  });
 </script>
 </body>
 </html>
