@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRU at Augusta University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #f9b625;
+      --orange:     #dd7d1b;
+      --gray:       #666062;
+      --deep-blue:  #007398;
+      --bright-blue:#3eb1c8;
+      --white:      #ffffff;
+      --sand:       #f4f4f4;
+      --pebble:     #f0f0f0;
+      --stone:      #e7e7e7;
+      --rock:       #b9b9b9;
+      --slate:      #909b9c;
+      --black:      #1a1a1a;
+      --text:       #333333;
+      --muted:      #666062;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%;
+      background: var(--white);
+      border-bottom: 1px solid var(--stone);
+    }
+
+    .nav-brand {
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo {
+      width: 32px; height: 32px; border-radius: 6px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px; font-weight: 700; color: var(--white);
+    }
+    .nav-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 14px; font-weight: 600; color: var(--black);
+      line-height: 1.2;
+    }
+    .nav-title span {
+      display: block; font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 400;
+      color: var(--slate); letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 28px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--gray);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+
+    .nav-cta {
+      font-size: 13px; font-weight: 600;
+      color: var(--white); background: var(--orange);
+      padding: 9px 20px; border-radius: 6px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #c56e15; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 80vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 6% 60px;
+      background: var(--white);
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--orange), var(--bright-blue));
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 620px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Sora', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+      padding: 6px 14px;
+      background: rgba(221,125,27,0.08);
+      border-radius: 4px;
+    }
+
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(30px, 6vw, 48px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--black); margin-bottom: 18px;
+    }
+    .hero h1 span {
+      color: var(--orange);
+    }
+
+    .hero-desc {
+      font-size: 15px; color: var(--muted);
+      line-height: 1.75; margin-bottom: 28px;
+      max-width: 500px; margin-left: auto; margin-right: auto;
+    }
+
+    .hero-meeting {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--sand);
+      border: 1px solid var(--stone);
+      border-radius: 8px;
+      padding: 12px 22px;
+      margin-bottom: 24px;
+      font-size: 14px; font-weight: 500; color: var(--black);
+    }
+    .hero-meeting .dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: var(--orange); color: var(--white);
+      padding: 14px 36px; border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px; font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-btn:hover { background: #c56e15; transform: translateY(-1px); }
+
+    /* ── SECTION SHARED ── */
+    .section-pad { padding: 72px 6%; }
+
+    .sec-tag {
+      font-family: 'Sora', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 8px;
+    }
+
+    .sec-heading {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 700; color: var(--black);
+      line-height: 1.25; margin-bottom: 16px;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--sand);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+    }
+
+    .about-copy p {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.85; margin-bottom: 12px;
+    }
+    .about-copy p strong {
+      color: var(--black); font-weight: 600;
+    }
+    .about-link {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px; font-weight: 600; color: var(--orange);
+      text-decoration: none; display: inline-flex;
+      align-items: center; gap: 6px; margin-top: 4px;
+      transition: gap 0.2s;
+    }
+    .about-link:hover { gap: 10px; }
+
+    .about-quote {
+      background: var(--deep-blue); border-radius: 12px;
+      padding: 40px 32px; position: relative; overflow: hidden;
+    }
+    .about-quote::after {
+      content: '\u271D'; position: absolute;
+      bottom: -10px; right: 20px;
+      font-size: 100px; color: rgba(255,255,255,0.06);
+      font-family: serif; line-height: 1;
+      pointer-events: none;
+    }
+    .about-quote blockquote {
+      font-family: 'Sora', sans-serif;
+      font-size: 20px; font-weight: 500;
+      font-style: italic;
+      color: rgba(255,255,255,0.92); line-height: 1.6;
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .about-quote cite {
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 11px; color: rgba(255,255,255,0.4);
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    /* ── WHAT WE DO ── */
+    .what { background: var(--white); }
+
+    .what-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .what-card {
+      background: var(--sand);
+      border: 1px solid var(--stone);
+      border-radius: 10px;
+      padding: 24px 22px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .what-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 16px rgba(249,182,37,0.12);
+    }
+    .what-card::before {
+      content: '';
+      position: absolute; top: 0; left: 24px; right: 24px;
+      height: 3px; border-radius: 0 0 3px 3px;
+      background: var(--gold);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .what-card:hover::before { opacity: 1; }
+
+    .card-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--stone);
+      margin-bottom: 8px; display: block;
+    }
+    .what-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px; font-weight: 600;
+      color: var(--black); margin-bottom: 6px;
+    }
+    .what-card p {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── CONNECT ── */
+    .connect {
+      background: var(--sand);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: start;
+    }
+
+    .connect-info > p {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.85; margin-bottom: 24px;
+    }
+
+    .detail-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid var(--stone);
+    }
+    .detail-row:last-of-type {
+      border-bottom: 1px solid var(--stone);
+    }
+    .detail-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(249,182,37,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0; color: var(--orange);
+    }
+    .detail-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 2px;
+    }
+    .detail-value {
+      font-size: 13px; font-weight: 500; color: var(--black);
+    }
+
+    .campus-map { margin-top: 20px; }
+    .campus-map-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 8px;
+    }
+    .campus-map-img {
+      width: 100%; border-radius: 8px;
+      border: 1px solid var(--stone);
+      display: block; cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .campus-map-img:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .campus-map-caption {
+      font-size: 11px; color: var(--slate);
+      margin-top: 6px; line-height: 1.5;
+    }
+
+    .lightbox {
+      display: none; position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 200; background: rgba(0,0,0,0.8);
+      align-items: center; justify-content: center;
+      padding: 24px; cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%; max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--stone);
+      border-radius: 12px;
+      padding: 24px 20px;
+    }
+    .form-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--black); margin-bottom: 4px;
+    }
+    .form-card > p {
+      font-size: 12px; color: var(--muted); margin-bottom: 14px;
+    }
+    .form-card iframe {
+      display: block; border-radius: 6px; border: none;
+      width: 100%; height: 580px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 28px 6%;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 14px;
+    }
+    .ft-brand {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .ft-logo {
+      width: 26px; height: 26px; border-radius: 5px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 11px; font-weight: 700; color: var(--white);
+    }
+    .ft-text {
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+    .ft-text span {
+      display: block;
+      font-size: 10px; color: rgba(255,255,255,0.3);
+    }
+    .ft-nav { display: flex; gap: 20px; }
+    .ft-nav a {
+      font-size: 12px; color: rgba(255,255,255,0.45);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .ft-nav a:hover { color: var(--gold); }
+
+    /* ── SOCIAL ICONS ── */
+    .ft-social {
+      display: flex; gap: 14px; align-items: center;
+    }
+    .ft-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.2s;
+    }
+    .ft-social a:hover {
+      background: rgba(249,182,37,0.2);
+    }
+    .ft-social svg {
+      width: 18px; height: 18px;
+      fill: rgba(255,255,255,0.55);
+      transition: fill 0.2s;
+    }
+    .ft-social a:hover svg {
+      fill: var(--gold);
+    }
+
+    /* ── FADE IN ── */
+    .fi {
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fi.vis { opacity: 1; transform: none; }
+
+    /* ─────────────── MOBILE ─────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 5%; height: 54px; }
+      .nav-links { display: none; }
+      .nav-cta { padding: 8px 14px; font-size: 12px; }
+
+      .hero {
+        min-height: auto;
+        padding: 80px 5% 48px;
+      }
+      .hero h1 { font-size: clamp(26px, 7.5vw, 36px); }
+      .hero-desc { font-size: 14px; }
+      .hero-meeting {
+        flex-direction: column; gap: 4px;
+        text-align: center; padding: 12px 16px;
+        width: 100%;
+      }
+      .hero-meeting .dot { display: none; }
+      .hero-btn { width: 100%; text-align: center; padding: 14px 24px; }
+
+      .about, .connect {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .section-pad { padding: 52px 5%; }
+      .about-quote { padding: 28px 22px; }
+      .about-quote blockquote { font-size: 17px; }
+
+      .what-grid { grid-template-columns: 1fr; gap: 12px; }
+      .what-card { padding: 20px 18px; }
+
+      .form-card { padding: 20px 16px; }
+      .form-card iframe { height: 520px; }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 5%; gap: 16px;
+      }
+      .ft-nav { flex-wrap: wrap; gap: 12px; }
+    }
+
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">C</div>
+    <div class="nav-title">CRU Augusta<span>Augusta University</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#what">What We Do</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+  <a class="nav-cta" href="#connect">Get Connected</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">CRU at Augusta University</div>
+    <h1>Knowing God <span>Personally.</span></h1>
+    <p class="hero-desc">We're a community of students helping each other know Jesus, grow in faith, and live with purpose. Whether you're exploring or have followed Christ for years — you're welcome here.</p>
+    <div class="hero-meeting">
+      <span>Mondays at 7:00 PM</span>
+      <span class="dot"></span>
+      <span>Pavilion III, Room 2340</span>
+    </div>
+    <br />
+    <a href="#connect" class="hero-btn">Come Join Us</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about section-pad" id="about">
+  <div class="about-quote fi">
+    <blockquote>"Every student. Every campus. Every nation."</blockquote>
+    <cite>— Cru Mission</cite>
+  </div>
+  <div class="about-copy fi">
+    <p class="sec-tag">Who We Are</p>
+    <h2 class="sec-heading">College is one of the most pivotal seasons of your life.</h2>
+    <p>We exist to help students discover who they are, why they're here, and how they can change the world for Christ.</p>
+    <p><strong>Win</strong> — reach the campus. <strong>Build</strong> — grow in faith. <strong>Send</strong> — impact the world.</p>
+    <a class="about-link" href="https://www.cru.org/us/en/about/statement-of-faith.html" target="_blank">Statement of Faith →</a>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what section-pad" id="what">
+  <p class="sec-tag">What We Do</p>
+  <h2 class="sec-heading">How we spend our time together.</h2>
+  <div class="what-grid">
+    <div class="what-card fi">
+      <span class="card-num">01</span>
+      <h3>Weekly Meeting</h3>
+      <p>Our main gathering — worship, a practical message, and real community. Everyone's welcome, bring a friend.</p>
+    </div>
+    <div class="what-card fi">
+      <span class="card-num">02</span>
+      <h3>Bible Study</h3>
+      <p>Going deeper through Scripture together. Currently walking through the Book of Romans with open discussion.</p>
+    </div>
+    <div class="what-card fi">
+      <span class="card-num">03</span>
+      <h3>Summer Missions</h3>
+      <p>Short-term mission opportunities across the U.S. and abroad. Come learn how you can go this summer.</p>
+    </div>
+    <div class="what-card fi">
+      <span class="card-num">04</span>
+      <h3>Our Beliefs</h3>
+      <p>Rooted in historic Christian faith — Scripture as our authority, Jesus as our center, the Great Commission as our call.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect section-pad" id="connect">
+  <div class="connect-info fi">
+    <p class="sec-tag">Connect</p>
+    <h2 class="sec-heading">Ready to take the first step?</h2>
+    <p>Fill out the form and someone will reach out — or just show up Monday night. No pressure, always welcome.</p>
+
+    <div class="detail-row">
+      <div class="detail-icon">&#x21A6;</div>
+      <div>
+        <p class="detail-label">Location</p>
+        <p class="detail-value">Health Science Campus<br>Pavilion III, Room 2340</p>
+      </div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon">&#x25F7;</div>
+      <div>
+        <p class="detail-label">Weekly Meeting</p>
+        <p class="detail-value">Mondays at 7:00 PM</p>
+      </div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon">&#x2709;</div>
+      <div>
+        <p class="detail-label">Email</p>
+        <p class="detail-value">cru.augustauniversity@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="campus-map">
+      <p class="campus-map-label">Find Us on Campus</p>
+      <img
+        class="campus-map-img"
+        src="Health_Science_Campus_Map.jpg"
+        alt="Health Sciences Campus map showing Pavilion III location"
+        onclick="document.getElementById('mapLightbox').classList.add('open')"
+      />
+      <p class="campus-map-caption">Tap to enlarge — we meet in Pavilion III, Room 2340.</p>
+    </div>
+  </div>
+
+  <div class="form-card fi">
+    <h3>Get Connected</h3>
+    <p>Let us know about you and how we can reach out.</p>
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdMqj4Xw4JkcGIj2utX44ipvFptdPRgDfZXkFdVb28SaJIszA/viewform?embedded=true"
+      width="100%"
+      height="580"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0">
+      Loading...
+    </iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-brand">
+    <div class="ft-logo">C</div>
+    <div class="ft-text">CRU at Augusta University<span>2026 &middot; Part of Cru &middot; Augusta, GA</span></div>
+  </div>
+  <div class="ft-social">
+    <a href="https://www.instagram.com/augustacru/" target="_blank" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/augustacru" target="_blank" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+  <div class="ft-nav">
+    <a href="#about">About</a>
+    <a href="#what">What We Do</a>
+    <a href="#connect">Connect</a>
+    <a href="https://cru.org" target="_blank">Cru.org</a>
+  </div>
+</footer>
+
+<!-- MAP LIGHTBOX -->
+<div class="lightbox" id="mapLightbox" onclick="this.classList.remove('open')">
+  <img src="Health_Science_Campus_Map.jpg" alt="Health Sciences Campus map enlarged" />
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('vis'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fi').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
