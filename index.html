@@ -43,7 +43,8 @@
       height: 60px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 6%;
-      background: var(--white);
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.85);
       border-bottom: 1px solid var(--stone);
     }
 
@@ -135,20 +136,6 @@
       font-size: 15px; color: var(--muted);
       line-height: 1.75; margin-bottom: 28px;
       max-width: 500px; margin-left: auto; margin-right: auto;
-    }
-
-    .hero-meeting {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--sand);
-      border: 1px solid var(--stone);
-      border-radius: 8px;
-      padding: 12px 22px;
-      margin-bottom: 24px;
-      font-size: 14px; font-weight: 500; color: var(--black);
-    }
-    .hero-meeting .dot {
-      width: 4px; height: 4px; border-radius: 50%;
-      background: var(--gold); flex-shrink: 0;
     }
 
     .hero-btn {
@@ -272,7 +259,7 @@
       line-height: 1.7;
     }
 
-    /* ── CONNECT ── */
+    /* ── EVENTS ── */
     .events {
       background: var(--white);
       text-align: center;
@@ -310,6 +297,46 @@
     }
     .events-link:hover {
       background: #c56e15;
+    }
+
+    /* ── WHAT IT'S LIKE ── */
+    .life {
+      background: var(--sand);
+    }
+    .life-copy {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+    .life-copy p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .life-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .life-card {
+      background: var(--white);
+      border: 1px solid var(--stone);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .life-media {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, rgba(249,182,37,0.2), rgba(62,177,200,0.16));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: var(--black);
+      text-transform: uppercase;
+      padding: 14px;
+      text-align: center;
     }
 
     .connect {
@@ -593,12 +620,6 @@
       }
       .hero h1 { font-size: clamp(26px, 7.5vw, 36px); }
       .hero-desc { font-size: 14px; }
-      .hero-meeting {
-        flex-direction: column; gap: 4px;
-        text-align: center; padding: 12px 16px;
-        width: 100%;
-      }
-      .hero-meeting .dot { display: none; }
       .hero-btn { width: 100%; text-align: center; padding: 14px 24px; }
 
       .about, .connect {
@@ -611,6 +632,7 @@
 
       .what-grid { grid-template-columns: 1fr; gap: 12px; }
       .what-card { padding: 20px 18px; }
+      .life-grid { grid-template-columns: 1fr; }
 
       .form-card { padding: 20px 16px; }
       .form-card iframe { height: 520px; }
@@ -674,15 +696,10 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-tag">CRU at Augusta University</div>
-    <h1>Knowing God <span>Personally.</span></h1>
-    <p class="hero-desc">We're a community of students helping each other know Jesus, grow in faith, and live with purpose. Whether you're exploring or have followed Christ for years — you're welcome here.</p>
-    <div class="hero-meeting">
-      <span>Mondays at 7:00 PM</span>
-      <span class="dot"></span>
-      <span>Pavilion III, Room 2340</span>
-    </div>
+    <h1>Know God. Find Community. <span>Live with Purpose.</span></h1>
+    <p class="hero-desc">We're a community of students at Augusta University helping people know Jesus Christ personally, grow in their faith, and make an impact that lasts.</p>
     <br />
-    <a href="#connect" class="hero-btn">Come Join Us</a>
+    <a href="#connect" class="hero-btn">Get Connected</a>
   </div>
 </div>
 
@@ -695,8 +712,9 @@
   <div class="about-copy fi">
     <p class="sec-tag">Who We Are</p>
     <h2 class="sec-heading">College is one of the most pivotal seasons of your life.</h2>
-    <p>We exist to help students discover who they are, why they're here, and how they can change the world for Christ.</p>
-    <p><strong>Win</strong> — reach the campus. <strong>Build</strong> — grow in faith. <strong>Send</strong> — impact the world.</p>
+    <p>We're a movement of students at Augusta University helping people know Jesus Christ, grow in their faith, and discover a life that truly matters.</p>
+    <p>As part of Cru, we're passionate about reaching our campus, building authentic community, and sending students out to change the world.</p>
+    <p><strong>Win</strong> — reach the campus.<br><strong>Build</strong> — grow in faith.<br><strong>Send</strong> — impact the world.</p>
     <a class="about-link" href="https://www.cru.org/us/en/about/statement-of-faith.html" target="_blank">Statement of Faith →</a>
   </div>
 </section>
@@ -704,27 +722,27 @@
 <!-- WHAT WE DO -->
 <section class="what section-pad" id="what">
   <p class="sec-tag">What We Do</p>
-  <h2 class="sec-heading">How we spend our time together.</h2>
+  <h2 class="sec-heading">How We Grow Together</h2>
   <div class="what-grid">
     <div class="what-card fi">
       <span class="card-num">01</span>
       <h3>Weekly Meeting</h3>
-      <p>Our main gathering — worship, a practical message, and real community. Everyone's welcome, bring a friend.</p>
+      <p>A space to worship, hear a relevant message, and connect with others. Whether it's your first time or you've been coming for years, you're welcome here.</p>
     </div>
     <div class="what-card fi">
       <span class="card-num">02</span>
       <h3>Bible Study</h3>
-      <p>Going deeper through Scripture together. Currently walking through the Book of Romans with open discussion.</p>
+      <p>Small groups where we open Scripture, ask real questions, and grow together in our understanding of God.</p>
     </div>
     <div class="what-card fi">
       <span class="card-num">03</span>
-      <h3>Summer Missions</h3>
-      <p>Short-term mission opportunities across the U.S. and abroad. Come learn how you can go this summer.</p>
+      <h3>Community</h3>
+      <p>We're more than a meeting. From late-night hangouts to meaningful conversations, this is a place to build real friendships.</p>
     </div>
     <div class="what-card fi">
       <span class="card-num">04</span>
-      <h3>Our Beliefs</h3>
-      <p>Rooted in historic Christian faith — Scripture as our authority, Jesus as our center, the Great Commission as our call.</p>
+      <h3>Missions</h3>
+      <p>Opportunities to take your faith beyond campus — across the country and around the world.</p>
     </div>
   </div>
 </section>
@@ -732,14 +750,29 @@
 <!-- EVENTS -->
 <section class="events section-pad" id="events">
   <div class="events-copy fi">
-    <p class="sec-tag">Upcoming Events</p>
-    <h2 class="sec-heading">See what is coming up this week.</h2>
+    <p class="sec-tag">Events</p>
+    <h2 class="sec-heading">What's Happening This Week</h2>
     <p>
-      Check the latest Augusta CRU events on our Presence page.
+      There's always something going on — from weekly gatherings to special events throughout the semester.
     </p>
+    <p>Come check it out and bring a friend.</p>
     <div class="events-actions">
-      <a class="events-link" href="https://augusta.presence.io/events/cru-3" target="_blank" rel="noopener noreferrer">Open Full Events Page</a>
+      <a class="events-link" href="https://augusta.presence.io/events/cru-3" target="_blank" rel="noopener noreferrer">View Upcoming Events</a>
     </div>
+  </div>
+</section>
+
+<!-- WHAT IT'S LIKE -->
+<section class="life section-pad" id="life">
+  <div class="life-copy fi">
+    <p class="sec-tag">What It's Like</p>
+    <h2 class="sec-heading">What It's Like</h2>
+    <p>Real people. Real community. Real growth.</p>
+  </div>
+  <div class="life-grid">
+    <div class="life-card fi"><div class="life-media">Small Groups Photo</div></div>
+    <div class="life-card fi"><div class="life-media">Worship Photo</div></div>
+    <div class="life-card fi"><div class="life-media">Hangouts Photo</div></div>
   </div>
 </section>
 
@@ -747,8 +780,8 @@
 <section class="connect section-pad" id="connect">
   <div class="connect-info fi">
     <p class="sec-tag">Connect</p>
-    <h2 class="sec-heading">Ready to take the first step?</h2>
-    <p>Fill out the form and someone will reach out — or just show up Monday night. No pressure, always welcome.</p>
+    <h2 class="sec-heading">Ready to Take the First Step?</h2>
+    <p>Fill out the form and someone from our team will reach out. Or just show up on Monday night — no pressure, you're always welcome.</p>
 
     <div class="detail-row">
       <div class="detail-icon">&#x21A6;</div>
@@ -787,7 +820,7 @@
 
   <div class="form-card fi">
     <h3>Get Connected</h3>
-    <p>Let us know about you and how we can reach out.</p>
+    <p>Let us know a little about you and how we can reach out.</p>
     <iframe
       src="https://docs.google.com/forms/d/e/1FAIpQLSfzecWSd_YWyzfL1zUptYp7CnZZ1HS4pA3ejOd4eYjbo9JX3w/viewform"
       width="100%"
@@ -807,7 +840,7 @@
 <footer>
   <div class="ft-brand">
     <div class="ft-logo">C</div>
-    <div class="ft-text">CRU at Augusta University<span>2026 &middot; Part of Cru &middot; Augusta, GA</span></div>
+    <div class="ft-text">CRU at Augusta University<span>Helping students know God and change the world.</span></div>
   </div>
   <div class="ft-social">
     <a href="https://www.instagram.com/augustacru/" target="_blank" aria-label="Instagram">
