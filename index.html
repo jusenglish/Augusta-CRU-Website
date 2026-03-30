@@ -273,6 +273,45 @@
     }
 
     /* ── CONNECT ── */
+    .events {
+      background: var(--white);
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .events-copy > p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .events-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .events-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: var(--orange);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Sora', sans-serif;
+      transition: background 0.2s;
+    }
+    .events-link:hover {
+      background: #c56e15;
+    }
+
     .connect {
       background: var(--sand);
       display: grid; grid-template-columns: 1fr 1fr;
@@ -468,6 +507,18 @@
       display: block; border-radius: 6px; border: none;
       width: 100%; height: 580px;
     }
+    .form-direct-link {
+      display: inline-flex;
+      margin-top: 12px;
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .form-direct-link:hover {
+      text-decoration: underline;
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -613,6 +664,7 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#what">What We Do</a></li>
+    <li><a href="#events">Upcoming Events</a></li>
     <li><a href="#connect">Connect</a></li>
   </ul>
   <a class="nav-cta" href="#connect">Get Connected</a>
@@ -677,6 +729,20 @@
   </div>
 </section>
 
+<!-- EVENTS -->
+<section class="events section-pad" id="events">
+  <div class="events-copy fi">
+    <p class="sec-tag">Upcoming Events</p>
+    <h2 class="sec-heading">See what is coming up this week.</h2>
+    <p>
+      Check the latest Augusta CRU events on our Presence page.
+    </p>
+    <div class="events-actions">
+      <a class="events-link" href="https://augusta.presence.io/events/cru-3" target="_blank" rel="noopener noreferrer">Open Full Events Page</a>
+    </div>
+  </div>
+</section>
+
 <!-- CONNECT -->
 <section class="connect section-pad" id="connect">
   <div class="connect-info fi">
@@ -711,7 +777,7 @@
       <button class="campus-map-trigger" id="openMapLightbox" type="button" aria-label="Open full-screen campus map viewer">
         <img
           class="campus-map-img"
-          src="Health%20Science%20Campus%20Map.jpg"
+          src="Health Science Campus Map.jpg"
           alt="Health Sciences Campus map showing Pavilion III location"
         />
       </button>
@@ -723,7 +789,7 @@
     <h3>Get Connected</h3>
     <p>Let us know about you and how we can reach out.</p>
     <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSdMqj4Xw4JkcGIj2utX44ipvFptdPRgDfZXkFdVb28SaJIszA/viewform?embedded=true"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfzecWSd_YWyzfL1zUptYp7CnZZ1HS4pA3ejOd4eYjbo9JX3w/viewform"
       width="100%"
       height="580"
       frameborder="0"
@@ -731,6 +797,9 @@
       marginwidth="0">
       Loading...
     </iframe>
+    <a class="form-direct-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfzecWSd_YWyzfL1zUptYp7CnZZ1HS4pA3ejOd4eYjbo9JX3w/viewform" target="_blank" rel="noopener noreferrer">
+      Form not loading? Open in a new tab
+    </a>
   </div>
 </section>
 
@@ -751,6 +820,7 @@
   <div class="ft-nav">
     <a href="#about">About</a>
     <a href="#what">What We Do</a>
+    <a href="#events">Upcoming Events</a>
     <a href="#connect">Connect</a>
     <a href="https://cru.org" target="_blank">Cru.org</a>
   </div>
@@ -766,7 +836,7 @@
       <button type="button" id="zoomInBtn" aria-label="Zoom in map">+</button>
     </div>
     <div class="lightbox-stage" id="mapStage">
-      <img id="mapZoomImage" src="Health%20Science%20Campus%20Map.jpg" alt="Health Sciences Campus map enlarged" draggable="false" />
+      <img id="mapZoomImage" src="Health Science Campus Map.jpg" alt="Health Sciences Campus map enlarged" draggable="false" />
     </div>
     <p class="lightbox-hint">Pinch, drag, or use your mouse wheel to zoom and move around the map.</p>
   </div>
